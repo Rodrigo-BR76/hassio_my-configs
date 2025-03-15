@@ -1,0 +1,74 @@
+
+# personalized {command_line:} entry
+
+  - sensor:
+      name: Battery status
+      unique_id: "sensor.battery_status"
+      command: 'cat /sys/class/power_supply/BAT0/status'
+      scan_interval: 300
+      #respostas=(Charging,...)
+
+  - sensor:
+      name: Battery charged percentage
+      unique_id: "sensor.battery_charged_percentage"
+      command: 'cat /sys/class/power_supply/BAT0/capacity'
+      unit_of_measurement: "%"
+      scan_interval: 300
+      #nivel de carga; 0% a 100%
+
+  - sensor:
+      name: Battery charged level
+      unique_id: "sensor.battery_charged_level"
+      command: 'cat /sys/class/power_supply/BAT0/capacity_level'
+      scan_interval: 300
+      #ok=normal, outros=critical, low, high e full
+
+  - sensor:
+      name: Battery level alert
+      unique_id: "sensor.battery_level_alert"
+      command: 'cat /sys/class/power_supply/BAT0/alarm'
+      value_template: "{{ 'Off' if value == '0' else 'On' }}"
+      #alerta de nível de bateria
+
+  - sensor:
+      name: Battery voltage
+      unique_id: "sensor.battery_voltage"
+      command: '/config/customize/battery_unit_voltage.sh'
+      value_template: "{{ value | round(2) }}"
+      unit_of_measurement: "V"
+      scan_interval: 300
+      #voltagem atual da bateria
+      #(valor da unidade convertido por script)
+
+  - sensor:
+      name: Battery charge
+      unique_id: "sensor.battery_charge"
+      command: '/config/customize/battery_unit_charging.sh'
+      value_template: "{{ value | round(2) }}"
+      unit_of_measurement: "A"
+      scan_interval: 300
+      #carga atual da bateria
+      #(valor da unidade convertido por script)
+
+  - sensor:
+      name: Battery current
+      unique_id: "sensor.battery_current"
+      command: '/config/customize/battery_unit_current.sh'
+      value_template: "{{ value | round(2) }}"
+      unit_of_measurement: "mAh"
+      scan_interval: 300
+      #corrente elétrica atual que está sendo fornecida ou consumida pela bateria
+      #(valor da unidade convertido por script)
+
+
+  - sensor:
+      name: Battery all parameters
+      unique_id: "sensor.battery_all_parameters"
+      command: '/config/customize/battery_all_parameters.sh'
+      scan_interval: 3600
+      json_attributes: ["NAME", "TYPE", "STATUS", "PRESENT", "TECHNOLOGY", "CYCLE_COUNT", "VOLTAGE_MIN_DESIGN", "VOLTAGE_NOW", "CURRENT_NOW", "CHARGE_FULL_DESIGN", "CHARGE_FULL", "CHARGE_NOW", "CAPACITY", "CAPACITY_LEVEL", "MODEL_NAME", "MANUFACTURER", "SERIAL_NUMBER"]
+      #valores POWER_SUPPLY convertido para JSON por script
+      #value_template: "{{ value_json.attribute }}"
+      #definido Template específico para cada atributo!
+      #state: "{{ state_attr('sensor.battery_all_parameters', 'attribute') }}"
+
