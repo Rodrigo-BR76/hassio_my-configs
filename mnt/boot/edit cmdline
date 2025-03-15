@@ -1,0 +1,1 @@
+>_ echo “$(cat /mnt/boot/cmdline.txt) consoleblank=240” > /mnt/boot/cmdline.txt
