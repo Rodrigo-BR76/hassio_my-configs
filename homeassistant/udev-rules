@@ -11,3 +11,8 @@
 
 >_ udevadm control --reload-rules
 >_ udevadm trigger
+
+-----------------------------------------------------------
+-ou conforme instruido em:
+
+{https://github.com/home-assistant/operating-system/blob/dev/Documentation/configuration.md}
