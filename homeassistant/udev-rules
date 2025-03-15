@@ -1,0 +1,6 @@
+-as regras devem ser carregadas para:
+[/etc/udev/rules.d/99-tempsensor.rules]
+
+-e após, serem carregadas;
+>_ udevadm control --reload-rules
+>_ udevadm trigger
