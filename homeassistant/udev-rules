@@ -16,3 +16,7 @@
 -ou conforme instruido em:
 
 {https://github.com/home-assistant/operating-system/blob/dev/Documentation/configuration.md}
+
+-e
+
+{https://github.com/home-assistant/core/tree/dev/homeassistant/components/temper}
